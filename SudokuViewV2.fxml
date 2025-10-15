@@ -1,0 +1,377 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane prefHeight="600.0" prefWidth="900.0" style="-fx-background-color: linear-gradient(to bottom, #8b5a2b, #4b2e05); -fx-background-radius: 10;" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.SudokuController">
+
+    <!-- Panel superior -->
+    <top>
+        <HBox alignment="CENTER_LEFT" spacing="20" BorderPane.alignment="CENTER">
+            <children>
+                <Label style="-fx-text-fill: white; -fx-font-size: 28px; -fx-font-weight: bold;" text="SUDOKU" />
+                <Label fx:id="timerLabel" style="-fx-text-fill: white; -fx-font-size: 18px;" text="Tiempo: 00:00" />
+                <Label fx:id="pointsLabel" style="-fx-text-fill: white; -fx-font-size: 18px;" text="Puntos: 0000" />
+            </children>
+            <padding>
+                <Insets bottom="10" left="10" right="10" top="10" />
+            </padding>
+        </HBox>
+    </top>
+
+    <!-- Panel izquierdo (botones de números) -->
+    <left>
+    <VBox alignment="CENTER" spacing="10" style="-fx-padding: 20;">
+        <Label style="-fx-text-fill: white; -fx-font-size: 22px; -fx-font-weight: bold;" text="Números" />
+
+        <GridPane alignment="CENTER" hgap="10" vgap="10">
+            <columnConstraints>
+                <ColumnConstraints percentWidth="50" />
+                <ColumnConstraints percentWidth="50" />
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints percentHeight="33" />
+                <RowConstraints percentHeight="33" />
+                <RowConstraints percentHeight="33" />
+            </rowConstraints>
+
+            <!-- Botones del 1 al 6 -->
+            <Button maxHeight="Infinity" maxWidth="Infinity" prefHeight="80" prefWidth="100" style="-fx-font-size: 26px; -fx-font-weight: bold;                            -fx-background-color: linear-gradient(to bottom, #d2a679, #a56b3b);                            -fx-text-fill: #2b1b05; -fx-background-radius: 10;                            -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 4, 0, 2, 2);" text="1" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+            <Button maxHeight="Infinity" maxWidth="Infinity" prefHeight="80" prefWidth="100" style="-fx-font-size: 26px; -fx-font-weight: bold;                            -fx-background-color: linear-gradient(to bottom, #d2a679, #a56b3b);                            -fx-text-fill: #2b1b05; -fx-background-radius: 10;                            -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 4, 0, 2, 2);" text="2" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+            <Button maxHeight="Infinity" maxWidth="Infinity" prefHeight="80" prefWidth="100" style="-fx-font-size: 26px; -fx-font-weight: bold;                            -fx-background-color: linear-gradient(to bottom, #d2a679, #a56b3b);                            -fx-text-fill: #2b1b05; -fx-background-radius: 10;                            -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 4, 0, 2, 2);" text="3" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+            <Button maxHeight="Infinity" maxWidth="Infinity" prefHeight="80" prefWidth="100" style="-fx-font-size: 26px; -fx-font-weight: bold;                            -fx-background-color: linear-gradient(to bottom, #d2a679, #a56b3b);                            -fx-text-fill: #2b1b05; -fx-background-radius: 10;                            -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 4, 0, 2, 2);" text="4" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <Button maxHeight="Infinity" maxWidth="Infinity" prefHeight="80" prefWidth="100" style="-fx-font-size: 26px; -fx-font-weight: bold;                            -fx-background-color: linear-gradient(to bottom, #d2a679, #a56b3b);                            -fx-text-fill: #2b1b05; -fx-background-radius: 10;                            -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 4, 0, 2, 2);" text="5" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+            <Button maxHeight="Infinity" maxWidth="Infinity" prefHeight="80" prefWidth="100" style="-fx-font-size: 26px; -fx-font-weight: bold;                            -fx-background-color: linear-gradient(to bottom, #d2a679, #a56b3b);                            -fx-text-fill: #2b1b05; -fx-background-radius: 10;                            -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 4, 0, 2, 2);" text="6" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+        </GridPane>
+
+        <!-- Botón borrar -->
+        <Button prefHeight="60" prefWidth="220" style="-fx-font-size: 20px; -fx-font-weight: bold;                        -fx-background-color: linear-gradient(to bottom, #a86e3a, #70421f);                        -fx-text-fill: white; -fx-background-radius: 10;                        -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.4), 4, 0, 2, 2);" text="Borrar" />
+    </VBox>
+</left>
+
+
+    <!-- Centro: tablero Sudoku 6x6 -->
+    <center>
+       <GridPane fx:id="sudokuGrid" alignment="CENTER" gridLinesVisible="true" hgap="4" style="-fx-background-color: #4b2e05; -fx-border-color: #2e1c07; -fx-padding: 20;" vgap="4">
+    <columnConstraints>
+        <ColumnConstraints percentWidth="16.6" />
+        <ColumnConstraints percentWidth="16.6" />
+        <ColumnConstraints percentWidth="16.6" />
+        <ColumnConstraints percentWidth="16.6" />
+        <ColumnConstraints percentWidth="16.6" />
+        <ColumnConstraints percentWidth="16.6" />
+    </columnConstraints>
+    <rowConstraints>
+        <RowConstraints percentHeight="16.6" />
+        <RowConstraints percentHeight="16.6" />
+        <RowConstraints percentHeight="16.6" />
+        <RowConstraints percentHeight="16.6" />
+        <RowConstraints percentHeight="16.6" />
+        <RowConstraints percentHeight="16.6" />
+    </rowConstraints>
+
+    <!-- Ejemplo de celda -->
+    <TextField fx:id="cell_0_0" alignment="CENTER" maxHeight="60" maxWidth="60" prefHeight="60" prefWidth="60" style="-fx-background-color: rgba(255,255,255,0.1);                       -fx-text-fill: white;                       -fx-font-size: 22px;                       -fx-font-weight: bold;                       -fx-border-color: #d2a679;                       -fx-border-radius: 4;                       -fx-background-radius: 4;" text="1" GridPane.columnIndex="0" GridPane.rowIndex="0">
+            <GridPane.margin>
+               <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
+            </GridPane.margin>
+            <font>
+               <Font size="20.0" />
+            </font></TextField>
+         <TextField fx:id="cell_0_01" alignment="CENTER" layoutX="52.0" layoutY="42.0" maxHeight="60" maxWidth="60" prefHeight="60" prefWidth="60" style="-fx-background-color: rgba(255,255,255,0.1);                       -fx-text-fill: white;                       -fx-font-size: 22px;                       -fx-font-weight: bold;                       -fx-border-color: #d2a679;                       -fx-border-radius: 4;                       -fx-background-radius: 4;" text="1" GridPane.columnIndex="1">
+            <GridPane.margin>
+               <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
+            </GridPane.margin>
+            <font>
+               <Font size="20.0" />
+            </font>
+         </TextField>
+         <TextField fx:id="cell_0_011" alignment="CENTER" layoutX="133.0" layoutY="42.0" maxHeight="60" maxWidth="60" prefHeight="60" prefWidth="60" style="-fx-background-color: rgba(255,255,255,0.1);                       -fx-text-fill: white;                       -fx-font-size: 22px;                       -fx-font-weight: bold;                       -fx-border-color: #d2a679;                       -fx-border-radius: 4;                       -fx-background-radius: 4;" text="1" GridPane.columnIndex="2">
+            <GridPane.margin>
+               <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
+            </GridPane.margin>
+            <font>
+               <Font size="20.0" />
+            </font>
+         </TextField>
+         <TextField fx:id="cell_0_0111" alignment="CENTER" layoutX="32.0" layoutY="42.0" maxHeight="60" maxWidth="60" prefHeight="60" prefWidth="60" style="-fx-background-color: rgba(255,255,255,0.1);                       -fx-text-fill: white;                       -fx-font-size: 22px;                       -fx-font-weight: bold;                       -fx-border-color: #d2a679;                       -fx-border-radius: 4;                       -fx-background-radius: 4;" text="1" GridPane.columnIndex="3">
+            <GridPane.margin>
+               <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
+            </GridPane.margin>
+            <font>
+               <Font size="20.0" />
+            </font>
+         </TextField>
+         <TextField fx:id="cell_0_0112" alignment="CENTER" layoutX="233.0" layoutY="42.0" maxHeight="60" maxWidth="60" prefHeight="60" prefWidth="60" style="-fx-background-color: rgba(255,255,255,0.1);                       -fx-text-fill: white;                       -fx-font-size: 22px;                       -fx-font-weight: bold;                       -fx-border-color: #d2a679;                       -fx-border-radius: 4;                       -fx-background-radius: 4;" text="1" GridPane.columnIndex="4">
+            <GridPane.margin>
+               <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
+            </GridPane.margin>
+            <font>
+               <Font size="20.0" />
+            </font>
+         </TextField>
+         <TextField fx:id="cell_0_0113" alignment="CENTER" layoutX="233.0" layoutY="42.0" maxHeight="60" maxWidth="60" prefHeight="60" prefWidth="60" style="-fx-background-color: rgba(255,255,255,0.1);                       -fx-text-fill: white;                       -fx-font-size: 22px;                       -fx-font-weight: bold;                       -fx-border-color: #d2a679;                       -fx-border-radius: 4;                       -fx-background-radius: 4;" text="1" GridPane.columnIndex="5">
+            <GridPane.margin>
+               <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
+            </GridPane.margin>
+            <font>
+               <Font size="20.0" />
+            </font>
+         </TextField>
+         <TextField fx:id="cell_0_0114" alignment="CENTER" layoutX="233.0" layoutY="42.0" maxHeight="60" maxWidth="60" prefHeight="60" prefWidth="60" style="-fx-background-color: rgba(255,255,255,0.1);                       -fx-text-fill: white;                       -fx-font-size: 22px;                       -fx-font-weight: bold;                       -fx-border-color: #d2a679;                       -fx-border-radius: 4;                       -fx-background-radius: 4;" text="1" GridPane.columnIndex="5" GridPane.rowIndex="1">
+            <GridPane.margin>
+               <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
+            </GridPane.margin>
+            <font>
+               <Font size="20.0" />
+            </font>
+         </TextField>
+         <TextField fx:id="cell_0_02" alignment="CENTER" maxHeight="60" maxWidth="60" prefHeight="60" prefWidth="60" style="-fx-background-color: rgba(255,255,255,0.1);                       -fx-text-fill: white;                       -fx-font-size: 22px;                       -fx-font-weight: bold;                       -fx-border-color: #d2a679;                       -fx-border-radius: 4;                       -fx-background-radius: 4;" text="1" GridPane.columnIndex="4" GridPane.rowIndex="1">
+            <GridPane.margin>
+               <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
+            </GridPane.margin>
+            <font>
+               <Font size="20.0" />
+            </font>
+         </TextField>
+         <TextField fx:id="cell_0_03" alignment="CENTER" maxHeight="60" maxWidth="60" prefHeight="60" prefWidth="60" style="-fx-background-color: rgba(255,255,255,0.1);                       -fx-text-fill: white;                       -fx-font-size: 22px;                       -fx-font-weight: bold;                       -fx-border-color: #d2a679;                       -fx-border-radius: 4;                       -fx-background-radius: 4;" text="1" GridPane.columnIndex="3" GridPane.rowIndex="1">
+            <GridPane.margin>
+               <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
+            </GridPane.margin>
+            <font>
+               <Font size="20.0" />
+            </font>
+         </TextField>
+         <TextField fx:id="cell_0_04" alignment="CENTER" maxHeight="60" maxWidth="60" prefHeight="60" prefWidth="60" style="-fx-background-color: rgba(255,255,255,0.1);                       -fx-text-fill: white;                       -fx-font-size: 22px;                       -fx-font-weight: bold;                       -fx-border-color: #d2a679;                       -fx-border-radius: 4;                       -fx-background-radius: 4;" text="1" GridPane.columnIndex="2" GridPane.rowIndex="1">
+            <GridPane.margin>
+               <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
+            </GridPane.margin>
+            <font>
+               <Font size="20.0" />
+            </font>
+         </TextField>
+         <TextField fx:id="cell_0_05" alignment="CENTER" maxHeight="60" maxWidth="60" prefHeight="60" prefWidth="60" style="-fx-background-color: rgba(255,255,255,0.1);                       -fx-text-fill: white;                       -fx-font-size: 22px;                       -fx-font-weight: bold;                       -fx-border-color: #d2a679;                       -fx-border-radius: 4;                       -fx-background-radius: 4;" text="1" GridPane.columnIndex="1" GridPane.rowIndex="1">
+            <GridPane.margin>
+               <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
+            </GridPane.margin>
+            <font>
+               <Font size="20.0" />
+            </font>
+         </TextField>
+         <TextField fx:id="cell_0_06" alignment="CENTER" maxHeight="60" maxWidth="60" prefHeight="60" prefWidth="60" style="-fx-background-color: rgba(255,255,255,0.1);                       -fx-text-fill: white;                       -fx-font-size: 22px;                       -fx-font-weight: bold;                       -fx-border-color: #d2a679;                       -fx-border-radius: 4;                       -fx-background-radius: 4;" text="1" GridPane.rowIndex="1">
+            <GridPane.margin>
+               <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
+            </GridPane.margin>
+            <font>
+               <Font size="20.0" />
+            </font>
+         </TextField>
+         <TextField fx:id="cell_0_07" alignment="CENTER" maxHeight="60" maxWidth="60" prefHeight="60" prefWidth="60" style="-fx-background-color: rgba(255,255,255,0.1);                       -fx-text-fill: white;                       -fx-font-size: 22px;                       -fx-font-weight: bold;                       -fx-border-color: #d2a679;                       -fx-border-radius: 4;                       -fx-background-radius: 4;" text="1" GridPane.rowIndex="2">
+            <GridPane.margin>
+               <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
+            </GridPane.margin>
+            <font>
+               <Font size="20.0" />
+            </font>
+         </TextField>
+         <TextField fx:id="cell_0_08" alignment="CENTER" maxHeight="60" maxWidth="60" prefHeight="60" prefWidth="60" style="-fx-background-color: rgba(255,255,255,0.1);                       -fx-text-fill: white;                       -fx-font-size: 22px;                       -fx-font-weight: bold;                       -fx-border-color: #d2a679;                       -fx-border-radius: 4;                       -fx-background-radius: 4;" text="1" GridPane.columnIndex="2" GridPane.rowIndex="2">
+            <GridPane.margin>
+               <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
+            </GridPane.margin>
+            <font>
+               <Font size="20.0" />
+            </font>
+         </TextField>
+         <TextField fx:id="cell_0_09" alignment="CENTER" maxHeight="60" maxWidth="60" prefHeight="60" prefWidth="60" style="-fx-background-color: rgba(255,255,255,0.1);                       -fx-text-fill: white;                       -fx-font-size: 22px;                       -fx-font-weight: bold;                       -fx-border-color: #d2a679;                       -fx-border-radius: 4;                       -fx-background-radius: 4;" text="1" GridPane.columnIndex="1" GridPane.rowIndex="2">
+            <GridPane.margin>
+               <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
+            </GridPane.margin>
+            <font>
+               <Font size="20.0" />
+            </font>
+         </TextField>
+         <TextField fx:id="cell_0_010" alignment="CENTER" maxHeight="60" maxWidth="60" prefHeight="60" prefWidth="60" style="-fx-background-color: rgba(255,255,255,0.1);                       -fx-text-fill: white;                       -fx-font-size: 22px;                       -fx-font-weight: bold;                       -fx-border-color: #d2a679;                       -fx-border-radius: 4;                       -fx-background-radius: 4;" text="1" GridPane.columnIndex="3" GridPane.rowIndex="2">
+            <GridPane.margin>
+               <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
+            </GridPane.margin>
+            <font>
+               <Font size="20.0" />
+            </font>
+         </TextField>
+         <TextField fx:id="cell_0_012" alignment="CENTER" maxHeight="60" maxWidth="60" prefHeight="60" prefWidth="60" style="-fx-background-color: rgba(255,255,255,0.1);                       -fx-text-fill: white;                       -fx-font-size: 22px;                       -fx-font-weight: bold;                       -fx-border-color: #d2a679;                       -fx-border-radius: 4;                       -fx-background-radius: 4;" text="1" GridPane.columnIndex="4" GridPane.rowIndex="2">
+            <GridPane.margin>
+               <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
+            </GridPane.margin>
+            <font>
+               <Font size="20.0" />
+            </font>
+         </TextField>
+         <TextField fx:id="cell_0_013" alignment="CENTER" maxHeight="60" maxWidth="60" prefHeight="60" prefWidth="60" style="-fx-background-color: rgba(255,255,255,0.1);                       -fx-text-fill: white;                       -fx-font-size: 22px;                       -fx-font-weight: bold;                       -fx-border-color: #d2a679;                       -fx-border-radius: 4;                       -fx-background-radius: 4;" text="1" GridPane.columnIndex="5" GridPane.rowIndex="2">
+            <GridPane.margin>
+               <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
+            </GridPane.margin>
+            <font>
+               <Font size="20.0" />
+            </font>
+         </TextField>
+         <TextField fx:id="cell_0_014" alignment="CENTER" maxHeight="60" maxWidth="60" prefHeight="60" prefWidth="60" style="-fx-background-color: rgba(255,255,255,0.1);                       -fx-text-fill: white;                       -fx-font-size: 22px;                       -fx-font-weight: bold;                       -fx-border-color: #d2a679;                       -fx-border-radius: 4;                       -fx-background-radius: 4;" text="1" GridPane.rowIndex="3">
+            <GridPane.margin>
+               <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
+            </GridPane.margin>
+            <font>
+               <Font size="20.0" />
+            </font>
+         </TextField>
+         <TextField fx:id="cell_0_015" alignment="CENTER" maxHeight="60" maxWidth="60" prefHeight="60" prefWidth="60" style="-fx-background-color: rgba(255,255,255,0.1);                       -fx-text-fill: white;                       -fx-font-size: 22px;                       -fx-font-weight: bold;                       -fx-border-color: #d2a679;                       -fx-border-radius: 4;                       -fx-background-radius: 4;" text="1" GridPane.columnIndex="1" GridPane.rowIndex="3">
+            <GridPane.margin>
+               <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
+            </GridPane.margin>
+            <font>
+               <Font size="20.0" />
+            </font>
+         </TextField>
+         <TextField fx:id="cell_0_016" alignment="CENTER" maxHeight="60" maxWidth="60" prefHeight="60" prefWidth="60" style="-fx-background-color: rgba(255,255,255,0.1);                       -fx-text-fill: white;                       -fx-font-size: 22px;                       -fx-font-weight: bold;                       -fx-border-color: #d2a679;                       -fx-border-radius: 4;                       -fx-background-radius: 4;" text="1" GridPane.columnIndex="2" GridPane.rowIndex="3">
+            <GridPane.margin>
+               <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
+            </GridPane.margin>
+            <font>
+               <Font size="20.0" />
+            </font>
+         </TextField>
+         <TextField fx:id="cell_0_017" alignment="CENTER" maxHeight="60" maxWidth="60" prefHeight="60" prefWidth="60" style="-fx-background-color: rgba(255,255,255,0.1);                       -fx-text-fill: white;                       -fx-font-size: 22px;                       -fx-font-weight: bold;                       -fx-border-color: #d2a679;                       -fx-border-radius: 4;                       -fx-background-radius: 4;" text="1" GridPane.columnIndex="3" GridPane.rowIndex="3">
+            <GridPane.margin>
+               <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
+            </GridPane.margin>
+            <font>
+               <Font size="20.0" />
+            </font>
+         </TextField>
+         <TextField fx:id="cell_0_018" alignment="CENTER" maxHeight="60" maxWidth="60" prefHeight="60" prefWidth="60" style="-fx-background-color: rgba(255,255,255,0.1);                       -fx-text-fill: white;                       -fx-font-size: 22px;                       -fx-font-weight: bold;                       -fx-border-color: #d2a679;                       -fx-border-radius: 4;                       -fx-background-radius: 4;" text="1" GridPane.columnIndex="4" GridPane.rowIndex="3">
+            <GridPane.margin>
+               <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
+            </GridPane.margin>
+            <font>
+               <Font size="20.0" />
+            </font>
+         </TextField>
+         <TextField fx:id="cell_0_019" alignment="CENTER" maxHeight="60" maxWidth="60" prefHeight="60" prefWidth="60" style="-fx-background-color: rgba(255,255,255,0.1);                       -fx-text-fill: white;                       -fx-font-size: 22px;                       -fx-font-weight: bold;                       -fx-border-color: #d2a679;                       -fx-border-radius: 4;                       -fx-background-radius: 4;" text="1" GridPane.columnIndex="5" GridPane.rowIndex="3">
+            <GridPane.margin>
+               <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
+            </GridPane.margin>
+            <font>
+               <Font size="20.0" />
+            </font>
+         </TextField>
+         <TextField fx:id="cell_0_020" alignment="CENTER" maxHeight="60" maxWidth="60" prefHeight="60" prefWidth="60" style="-fx-background-color: rgba(255,255,255,0.1);                       -fx-text-fill: white;                       -fx-font-size: 22px;                       -fx-font-weight: bold;                       -fx-border-color: #d2a679;                       -fx-border-radius: 4;                       -fx-background-radius: 4;" text="1" GridPane.rowIndex="4">
+            <GridPane.margin>
+               <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
+            </GridPane.margin>
+            <font>
+               <Font size="20.0" />
+            </font>
+         </TextField>
+         <TextField fx:id="cell_0_021" alignment="CENTER" maxHeight="60" maxWidth="60" prefHeight="60" prefWidth="60" style="-fx-background-color: rgba(255,255,255,0.1);                       -fx-text-fill: white;                       -fx-font-size: 22px;                       -fx-font-weight: bold;                       -fx-border-color: #d2a679;                       -fx-border-radius: 4;                       -fx-background-radius: 4;" text="1" GridPane.columnIndex="1" GridPane.rowIndex="4">
+            <GridPane.margin>
+               <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
+            </GridPane.margin>
+            <font>
+               <Font size="20.0" />
+            </font>
+         </TextField>
+         <TextField fx:id="cell_0_022" alignment="CENTER" maxHeight="60" maxWidth="60" prefHeight="60" prefWidth="60" style="-fx-background-color: rgba(255,255,255,0.1);                       -fx-text-fill: white;                       -fx-font-size: 22px;                       -fx-font-weight: bold;                       -fx-border-color: #d2a679;                       -fx-border-radius: 4;                       -fx-background-radius: 4;" text="1" GridPane.columnIndex="2" GridPane.rowIndex="4">
+            <GridPane.margin>
+               <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
+            </GridPane.margin>
+            <font>
+               <Font size="20.0" />
+            </font>
+         </TextField>
+         <TextField fx:id="cell_0_023" alignment="CENTER" maxHeight="60" maxWidth="60" prefHeight="60" prefWidth="60" style="-fx-background-color: rgba(255,255,255,0.1);                       -fx-text-fill: white;                       -fx-font-size: 22px;                       -fx-font-weight: bold;                       -fx-border-color: #d2a679;                       -fx-border-radius: 4;                       -fx-background-radius: 4;" text="1" GridPane.columnIndex="3" GridPane.rowIndex="4">
+            <GridPane.margin>
+               <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
+            </GridPane.margin>
+            <font>
+               <Font size="20.0" />
+            </font>
+         </TextField>
+         <TextField fx:id="cell_0_024" alignment="CENTER" maxHeight="60" maxWidth="60" prefHeight="60" prefWidth="60" style="-fx-background-color: rgba(255,255,255,0.1);                       -fx-text-fill: white;                       -fx-font-size: 22px;                       -fx-font-weight: bold;                       -fx-border-color: #d2a679;                       -fx-border-radius: 4;                       -fx-background-radius: 4;" text="1" GridPane.columnIndex="4" GridPane.rowIndex="4">
+            <GridPane.margin>
+               <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
+            </GridPane.margin>
+            <font>
+               <Font size="20.0" />
+            </font>
+         </TextField>
+         <TextField fx:id="cell_0_025" alignment="CENTER" maxHeight="60" maxWidth="60" prefHeight="60" prefWidth="60" style="-fx-background-color: rgba(255,255,255,0.1);                       -fx-text-fill: white;                       -fx-font-size: 22px;                       -fx-font-weight: bold;                       -fx-border-color: #d2a679;                       -fx-border-radius: 4;                       -fx-background-radius: 4;" text="1" GridPane.columnIndex="5" GridPane.rowIndex="4">
+            <GridPane.margin>
+               <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
+            </GridPane.margin>
+            <font>
+               <Font size="20.0" />
+            </font>
+         </TextField>
+         <TextField fx:id="cell_0_026" alignment="CENTER" maxHeight="60" maxWidth="60" prefHeight="60" prefWidth="60" style="-fx-background-color: rgba(255,255,255,0.1);                       -fx-text-fill: white;                       -fx-font-size: 22px;                       -fx-font-weight: bold;                       -fx-border-color: #d2a679;                       -fx-border-radius: 4;                       -fx-background-radius: 4;" text="1" GridPane.rowIndex="5">
+            <GridPane.margin>
+               <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
+            </GridPane.margin>
+            <font>
+               <Font size="20.0" />
+            </font>
+         </TextField>
+         <TextField fx:id="cell_0_027" alignment="CENTER" maxHeight="60" maxWidth="60" prefHeight="60" prefWidth="60" style="-fx-background-color: rgba(255,255,255,0.1);                       -fx-text-fill: white;                       -fx-font-size: 22px;                       -fx-font-weight: bold;                       -fx-border-color: #d2a679;                       -fx-border-radius: 4;                       -fx-background-radius: 4;" text="1" GridPane.columnIndex="1" GridPane.rowIndex="5">
+            <GridPane.margin>
+               <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
+            </GridPane.margin>
+            <font>
+               <Font size="20.0" />
+            </font>
+         </TextField>
+         <TextField fx:id="cell_0_028" alignment="CENTER" maxHeight="60" maxWidth="60" prefHeight="60" prefWidth="60" style="-fx-background-color: rgba(255,255,255,0.1);                       -fx-text-fill: white;                       -fx-font-size: 22px;                       -fx-font-weight: bold;                       -fx-border-color: #d2a679;                       -fx-border-radius: 4;                       -fx-background-radius: 4;" text="1" GridPane.columnIndex="2" GridPane.rowIndex="5">
+            <GridPane.margin>
+               <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
+            </GridPane.margin>
+            <font>
+               <Font size="20.0" />
+            </font>
+         </TextField>
+         <TextField fx:id="cell_0_029" alignment="CENTER" maxHeight="60" maxWidth="60" prefHeight="60" prefWidth="60" style="-fx-background-color: rgba(255,255,255,0.1);                       -fx-text-fill: white;                       -fx-font-size: 22px;                       -fx-font-weight: bold;                       -fx-border-color: #d2a679;                       -fx-border-radius: 4;                       -fx-background-radius: 4;" text="1" GridPane.columnIndex="3" GridPane.rowIndex="5">
+            <GridPane.margin>
+               <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
+            </GridPane.margin>
+            <font>
+               <Font size="20.0" />
+            </font>
+         </TextField>
+         <TextField fx:id="cell_0_030" alignment="CENTER" maxHeight="60" maxWidth="60" prefHeight="60" prefWidth="60" style="-fx-background-color: rgba(255,255,255,0.1);                       -fx-text-fill: white;                       -fx-font-size: 22px;                       -fx-font-weight: bold;                       -fx-border-color: #d2a679;                       -fx-border-radius: 4;                       -fx-background-radius: 4;" text="1" GridPane.columnIndex="4" GridPane.rowIndex="5">
+            <GridPane.margin>
+               <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
+            </GridPane.margin>
+            <font>
+               <Font size="20.0" />
+            </font>
+         </TextField>
+         <TextField fx:id="cell_0_031" alignment="CENTER" maxHeight="60" maxWidth="60" prefHeight="60" prefWidth="60" style="-fx-background-color: rgba(255,255,255,0.1);                       -fx-text-fill: white;                       -fx-font-size: 22px;                       -fx-font-weight: bold;                       -fx-border-color: #d2a679;                       -fx-border-radius: 4;                       -fx-background-radius: 4;" text="1" GridPane.columnIndex="5" GridPane.rowIndex="5">
+            <GridPane.margin>
+               <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
+            </GridPane.margin>
+            <font>
+               <Font size="20.0" />
+            </font>
+         </TextField>
+         <BorderPane.margin>
+            <Insets />
+         </BorderPane.margin>
+</GridPane>
+
+    </center>
+
+</BorderPane>
