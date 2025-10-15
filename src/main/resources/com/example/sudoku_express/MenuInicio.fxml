@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane prefHeight="600" prefWidth="900" style="-fx-background-color: linear-gradient(to bottom, #8b5a2b, #4b2e05); -fx-background-radius: 10;" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.MenuController">
+
+    <!-- CENTRO: contenido principal -->
+    <center>
+        <VBox alignment="CENTER" spacing="30" BorderPane.alignment="CENTER">
+            <children>
+
+                <!-- Título principal -->
+                <Label style="-fx-text-fill: white; -fx-font-size: 60px; -fx-font-weight: bold;" text="SUDOKU" />
+                <Label style="-fx-text-fill: #f0e6d2; -fx-font-size: 24px; -fx-font-weight: bold;" text="Versión 6x6" />
+
+                <!-- Botones -->
+                <VBox alignment="CENTER" spacing="20">
+                    <children>
+                        <Button fx:id="btnJugar" style="-fx-font-size: 22px; -fx-font-weight: bold;                                        -fx-background-color: #d2a679;                                        -fx-text-fill: #2b1b05;                                        -fx-background-radius: 10;                                        -fx-padding: 10 40 10 40;" text="Jugar" />
+                        <Button fx:id="btnInstrucciones" style="-fx-font-size: 22px; -fx-font-weight: bold;                                        -fx-background-color: #c28c52;                                        -fx-text-fill: white;                                        -fx-background-radius: 10;                                        -fx-padding: 10 40 10 40;" text="Instrucciones" />
+                        <Button fx:id="btnSalir" style="-fx-font-size: 22px; -fx-font-weight: bold;                                        -fx-background-color: #a86e3a;                                        -fx-text-fill: white;                                        -fx-background-radius: 10;                                        -fx-padding: 10 40 10 40;" text="Salir" />
+                    </children>
+                </VBox>
+            </children>
+            <padding>
+                <Insets bottom="40" left="20" right="20" top="40" />
+            </padding>
+        </VBox>
+    </center>
+
+    <!-- PIE DE PÁGINA (créditos opcionales) -->
+    <bottom>
+        <Label style="-fx-text-fill: #e8d3b0; -fx-font-size: 14px; -fx-padding: 10;" text=" 2025 Sudoku  - Versión 6x6" BorderPane.alignment="CENTER" />
+    </bottom>
+
+</BorderPane>
