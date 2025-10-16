@@ -21,7 +21,6 @@ public class PuzzleGenerator {
     public void cleanBoard(){
         this.board=new int[SIZE][SIZE];
         this.fixed = new boolean[SIZE][SIZE];
-        int row_count,colum_count,block_count;
         //establecemos los valores de inicio en ceros
         for (int fila = 0; fila < SIZE; fila++) {
             for (int col = 0; col < SIZE; col++) {
