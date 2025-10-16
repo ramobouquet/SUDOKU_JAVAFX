@@ -4,7 +4,7 @@ package Controllers;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 
-public class MainviewController {
+public class MenuController {
 
     @FXML
     private Button btnInstrucciones;

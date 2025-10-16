@@ -1,6 +1,8 @@
 package Controllers;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
@@ -8,115 +10,136 @@ import javafx.scene.layout.GridPane;
 public class SudokuController {
 
     @FXML
-    private TextField cell_0_0;
+    private Button Buton0_0;
 
     @FXML
-    private TextField cell_0_01;
+    private Button Buton0_1;
 
     @FXML
-    private TextField cell_0_010;
+    private Button Buton1_0;
 
     @FXML
-    private TextField cell_0_011;
+    private Button Buton1_1;
 
     @FXML
-    private TextField cell_0_0111;
+    private Button Buton2_0;
 
     @FXML
-    private TextField cell_0_0112;
+    private Button Buton2_1;
 
     @FXML
-    private TextField cell_0_0113;
+    private TextField celda0_0;
 
     @FXML
-    private TextField cell_0_0114;
+    private TextField celda0_1;
 
     @FXML
-    private TextField cell_0_012;
+    private TextField celda0_2;
 
     @FXML
-    private TextField cell_0_013;
+    private TextField celda0_3;
 
     @FXML
-    private TextField cell_0_014;
+    private TextField celda0_4;
 
     @FXML
-    private TextField cell_0_015;
+    private TextField celda0_5;
 
     @FXML
-    private TextField cell_0_016;
+    private TextField celda1_0;
 
     @FXML
-    private TextField cell_0_017;
+    private TextField celda1_1;
 
     @FXML
-    private TextField cell_0_018;
+    private TextField celda1_2;
 
     @FXML
-    private TextField cell_0_019;
+    private TextField celda1_3;
 
     @FXML
-    private TextField cell_0_02;
+    private TextField celda1_4;
 
     @FXML
-    private TextField cell_0_020;
+    private TextField celda1_5;
 
     @FXML
-    private TextField cell_0_021;
+    private TextField celda2_0;
 
     @FXML
-    private TextField cell_0_022;
+    private TextField celda2_1;
 
     @FXML
-    private TextField cell_0_023;
+    private TextField celda2_2;
 
     @FXML
-    private TextField cell_0_024;
+    private TextField celda2_3;
 
     @FXML
-    private TextField cell_0_025;
+    private TextField celda2_4;
 
     @FXML
-    private TextField cell_0_026;
+    private TextField celda2_5;
 
     @FXML
-    private TextField cell_0_027;
+    private TextField celda3_0;
 
     @FXML
-    private TextField cell_0_028;
+    private TextField celda3_1;
 
     @FXML
-    private TextField cell_0_029;
+    private TextField celda3_2;
 
     @FXML
-    private TextField cell_0_03;
+    private TextField celda3_3;
 
     @FXML
-    private TextField cell_0_030;
+    private TextField celda3_4;
 
     @FXML
-    private TextField cell_0_031;
+    private TextField celda3_5;
 
     @FXML
-    private TextField cell_0_04;
+    private TextField celda4_0;
 
     @FXML
-    private TextField cell_0_05;
+    private TextField celda4_1;
 
     @FXML
-    private TextField cell_0_06;
+    private TextField celda4_2;
 
     @FXML
-    private TextField cell_0_07;
+    private TextField celda4_3;
 
     @FXML
-    private TextField cell_0_08;
+    private TextField celda4_4;
 
     @FXML
-    private TextField cell_0_09;
+    private TextField celda4_5;
+
+    @FXML
+    private TextField celda5_0;
+
+    @FXML
+    private TextField celda5_1;
+
+    @FXML
+    private TextField celda5_2;
+
+    @FXML
+    private TextField celda5_3;
+
+    @FXML
+    private TextField celda5_4;
+
+    @FXML
+    private TextField celda5_5;
 
     @FXML
     private Label pointsLabel;
+
+    @FXML
+    private GridPane seleccionGridPane;
 
     @FXML
     private GridPane sudokuGrid;
@@ -124,5 +147,9 @@ public class SudokuController {
     @FXML
     private Label timerLabel;
 
-}
+    @FXML
+    void onActionDelete(ActionEvent event) {
 
+    }
+
+}
