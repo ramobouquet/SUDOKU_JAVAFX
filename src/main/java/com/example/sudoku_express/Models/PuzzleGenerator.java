@@ -1,4 +1,4 @@
-package Models;
+package com.example.sudoku_express.Models;
 
 import java.util.Random;
 

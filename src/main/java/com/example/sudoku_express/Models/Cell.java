@@ -1,4 +1,4 @@
-package Models;
+package com.example.sudoku_express.Models;
 
 /**
  * Esta clase representa una celda individual del tablero de Sudoku.

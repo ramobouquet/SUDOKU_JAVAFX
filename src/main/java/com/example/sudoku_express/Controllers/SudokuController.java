@@ -1,4 +1,4 @@
-package Controllers;
+package com.example.sudoku_express.Controllers;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;

@@ -1,4 +1,4 @@
-package Models;
+package com.example.sudoku_express.Models;
 
 import javafx.scene.control.Alert;
 

@@ -1,6 +1,6 @@
-package Controllers;
+package com.example.sudoku_express.Controllers;
 
-import Models.AlertBox;
+import com.example.sudoku_express.Models.AlertBox;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -10,6 +10,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+
 
 public class MenuController {
 
