@@ -1,5 +1,6 @@
 package Controllers;
 
+import Models.AlertBox;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -20,6 +21,11 @@ public class MenuController {
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.setScene(new Scene(root));
         stage.setTitle("Sudoku 6x6");
+        AlertBox alertBox = new AlertBox();
+        alertBox.showAlertBox("INICIO DE SUDOKU",
+                "ESTAS A PUNTO DE INICIAR UN JUEGO"
+                ,"LISTOS PARA COMENZAR");
+
         stage.show();
     }
 
